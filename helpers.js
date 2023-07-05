@@ -2,6 +2,32 @@
 const host = 'https://smoothy-api.onrender.com';
 // const host = 'http://localhost:3000';
 
+export async function updateOrder(id, status) {
+  const options = {
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    method: 'PATCH',
+    body: JSON.stringify({ status })
+  };
+
+  const res = await fetch(host + `/admin/orders/${id}`, options);
+
+  return await res.json();
+}
+
+export async function getOrders() {
+  const options = {
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  };
+
+  const res = await fetch(host + `/admin/orders`, options);
+
+  return await res.json();
+}
+
 export async function getUsers() {
   const options = {
     headers: {
