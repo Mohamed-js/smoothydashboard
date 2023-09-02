@@ -1,6 +1,6 @@
 // import { getToken } from './auth';
-// const host = 'https://smoothy-api.onrender.com';
-const host = 'http://localhost:4000';
+const host = 'https://smoothy-api.onrender.com';
+// const host = 'http://localhost:4000';
 
 export async function updateOrder(id, status) {
   const options = {
