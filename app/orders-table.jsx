@@ -22,26 +22,23 @@ export default function OrdersTable({ loadOrders }) {
 
   useEffect(() => {
     // const socket = io('ws://smoothy-api.onrender.com');
-    const socket = io('ws://localhost:8000');
-
-    socket.on('connect', () => {});
-    socket.on('new-order', () => {
-      getOrders()
-        .then((data) => data)
-        .then((data) => setOrders(data));
-      console.log('order received');
-      audRef.current.play();
-    });
-
-    // handle the event sent with socket.emit()
-    socket.on('salutations', (elem1, elem2, elem3) => {
-      console.log(elem1, elem2, elem3);
-    });
-
-    return () => {
-      socket.off('connect', onConnect);
-      socket.off('disconnect', onDisconnect);
-    };
+    // const socket = io('ws://localhost:8000');
+    // socket.on('connect', () => {});
+    // socket.on('new-order', () => {
+    //   getOrders()
+    //     .then((data) => data)
+    //     .then((data) => setOrders(data));
+    //   console.log('order received');
+    //   audRef.current.play();
+    // });
+    // // handle the event sent with socket.emit()
+    // socket.on('salutations', (elem1, elem2, elem3) => {
+    //   console.log(elem1, elem2, elem3);
+    // });
+    // return () => {
+    //   socket.off('connect', onConnect);
+    //   socket.off('disconnect', onDisconnect);
+    // };
   }, []);
 
   return (
@@ -66,31 +63,27 @@ export default function OrdersTable({ loadOrders }) {
         {orders.map((order) => {
           return (
             <>
-              <TableRow key={order._id} className="h-28">
+              <TableRow key={order.id} className="h-28">
                 <TableCell className="relative">
-                  <p>{order._id}</p>
+                  <p>{order.id}</p>
                 </TableCell>
                 <TableCell>{order.user.email}</TableCell>
-                <TableCell className="capitalize">
-                  {order.country} - {order.city}
-                </TableCell>
+                <TableCell className="capitalize">{order.city}</TableCell>
                 <TableCell>
                   <div className="flex items-center justify-between rounded-xl p-1 px-3">
                     <span className="leading-4">{order.address}</span>
                   </div>
                 </TableCell>
                 <TableCell>
-                  <Text className="capitalize">
-                    {order.first_name} {order.last_name}
-                  </Text>
+                  <Text className="capitalize">{order.first_name}</Text>
                 </TableCell>
                 <TableCell>
                   <Text>{order.phone}</Text>
                 </TableCell>
                 <TableCell>
                   <Text>
-                    {order.items.reduce((prev, item) => {
-                      return prev + item.quantity * item.product.price;
+                    {order.products.reduce((prev, product) => {
+                      return prev + product.order_item.quantity * product.price;
                     }, 0)}{' '}
                     EGP
                   </Text>
@@ -100,27 +93,27 @@ export default function OrdersTable({ loadOrders }) {
                 </TableCell>
               </TableRow>
 
-              {order.items.map((item) => (
-                <TableRow key={item.product._id} className="h-28 bg-slate-100">
+              {order.products.map((product) => (
+                <TableRow key={product.id} className="h-28 bg-slate-100">
                   <TableCell className="relative">
                     <Image
                       className="object-contain object-left p-2"
-                      src={item.product.image}
-                      alt={item.product.title}
+                      src={product.image}
+                      alt={product.title}
                       fill
                     />
                   </TableCell>
-                  <TableCell className="capitalize">
-                    {item.product.title}
+                  <TableCell className="capitalize">{product.title}</TableCell>
+                  <TableCell>
+                    <Text>{product.price} EGP</Text>
                   </TableCell>
                   <TableCell>
-                    <Text>{item.product.price} EGP</Text>
+                    <Text>{product.order_item.quantity} Units</Text>
                   </TableCell>
                   <TableCell>
-                    <Text>{item.quantity} Units</Text>
-                  </TableCell>
-                  <TableCell>
-                    <Text>{item.quantity * item.product.price} EGP</Text>
+                    <Text>
+                      {product.order_item.quantity * product.price} EGP
+                    </Text>
                   </TableCell>
                 </TableRow>
               ))}
@@ -175,7 +168,7 @@ export const Menu = ({ order, setOrders }) => {
                   <div
                     key={status}
                     className="p-1 capitalize cursor-pointer mb-1 text-black font-semibold"
-                    onClick={() => handleStatusChange(order._id, status)}
+                    onClick={() => handleStatusChange(order.id, status)}
                   >
                     Mark As {status}
                   </div>

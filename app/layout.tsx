@@ -22,7 +22,7 @@ export default async function RootLayout({
           <Nav />
         </Suspense>
         {children}
-        <Analytics />
+        {/* <Analytics /> */}
       </body>
     </html>
   );

@@ -1,6 +1,6 @@
 // import { getToken } from './auth';
-const host = 'https://smoothy-api.onrender.com';
-// const host = 'http://localhost:3000';
+// const host = 'https://smoothy-api.onrender.com';
+const host = 'http://localhost:4000';
 
 export async function updateOrder(id, status) {
   const options = {
@@ -37,6 +37,7 @@ export async function getUsers() {
 
   const res = await fetch(host + `/admin/users`, options);
 
+  // console.log(await res.json());
   return await res.json();
 }
 
@@ -61,6 +62,19 @@ export async function getProduct(id) {
 
   const res = await fetch(host + `/admin/products/${id}`, options);
 
+  return await res.json();
+}
+
+export async function createProduct(id, product) {
+  const options = {
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    method: 'POST',
+    body: JSON.stringify(product)
+  };
+
+  const res = await fetch(host + `/admin/products/${id}`, options);
   return await res.json();
 }
 

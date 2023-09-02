@@ -23,14 +23,12 @@ export default function UsersTable({ users }) {
       </TableHead>
       <TableBody>
         {users.map((user) => (
-          <TableRow key={user._id}>
+          <TableRow key={user.id}>
             <TableCell>
               <Text>{user.email}</Text>
             </TableCell>
             <TableCell className="capitalize">
-              {(user.orders.length > 0 &&
-                user.orders[0].first_name + ' ' + user.orders[0].last_name) ||
-                '-'}
+              {(user.orders.length > 0 && user.orders[0].first_name) || '-'}
             </TableCell>
             <TableCell>
               <Text>
@@ -46,7 +44,7 @@ export default function UsersTable({ users }) {
               <Text>{user.orders.length}</Text>
             </TableCell>
             <TableCell>
-              <Text>{user.cart_items.length}</Text>
+              <Text>{user.products.length}</Text>
             </TableCell>
           </TableRow>
         ))}
