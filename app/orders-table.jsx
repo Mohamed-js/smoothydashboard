@@ -21,7 +21,7 @@ export default function OrdersTable({ loadOrders }) {
   const audRef = useRef();
 
   useEffect(() => {
-    // const socket = io('ws://smoothy-api.onrender.com');
+    // const socket = io('ws://knowledgeable-helpful-bubbler.glitch.me');
     // const socket = io('ws://localhost:8000');
     // socket.on('connect', () => {});
     // socket.on('new-order', () => {

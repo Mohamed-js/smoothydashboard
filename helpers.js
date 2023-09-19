@@ -1,5 +1,5 @@
 // import { getToken } from './auth';
-const host = 'https://smoothy-api.onrender.com';
+const host = 'https://knowledgeable-helpful-bubbler.glitch.me';
 // const host = 'http://localhost:4000';
 
 export async function updateOrder(id, status) {
