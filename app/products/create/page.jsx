@@ -1,24 +1,18 @@
 'use client';
 import { createProduct } from '../../../helpers';
 import { useState, useEffect } from 'react';
-export default async function CreateProductPage({ params }) {
+export default async function CreateProductPage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     var data = Object.fromEntries(new FormData(e.target));
-    const res = await createProduct(params.id, data);
-    console.log(res);
+    const res = await createProduct(data);
   };
 
   return (
     <main className="p-4 md:p-10 mx-auto max-w-7xl">
       <>
         <h1 className="font-semibold capitalize">Create Product</h1>
-        <form
-          className="py-4 md
-          <br />
-            <hr />:py-10 flex flex-col"
-          onSubmit={handleSubmit}
-        >
+        <form className="py-4 md:py-5 flex flex-col" onSubmit={handleSubmit}>
           <label className="mt-3" htmlFor="title">
             Title
           </label>
@@ -134,7 +128,7 @@ export default async function CreateProductPage({ params }) {
             rows={4}
           ></textarea>
           <button className="p-1 rounded mt-2 text-orange-700 bg-orange-200">
-            Update
+            Create
           </button>
         </form>
       </>

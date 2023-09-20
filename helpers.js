@@ -1,6 +1,31 @@
 // import { getToken } from './auth';
-const host = 'https://knowledgeable-helpful-bubbler.glitch.me';
+const host = 'https://lucky-industrious-fortnight.glitch.me';
 // const host = 'http://localhost:4000';
+
+export async function getPromoCodes() {
+  const options = {
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  };
+
+  const res = await fetch(host + `/admin/promocodes`, options);
+
+  return await res.json();
+}
+
+export async function createPromoCode(promocode) {
+  const options = {
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    method: 'POST',
+    body: JSON.stringify(promocode)
+  };
+
+  const res = await fetch(host + `/admin/promocodes`, options);
+  return await res.json();
+}
 
 export async function updateOrder(id, status) {
   const options = {
@@ -65,7 +90,7 @@ export async function getProduct(id) {
   return await res.json();
 }
 
-export async function createProduct(id, product) {
+export async function createProduct(product) {
   const options = {
     headers: {
       'Content-Type': 'application/json'
@@ -74,7 +99,7 @@ export async function createProduct(id, product) {
     body: JSON.stringify(product)
   };
 
-  const res = await fetch(host + `/admin/products/${id}`, options);
+  const res = await fetch(host + `/admin/products`, options);
   return await res.json();
 }
 
