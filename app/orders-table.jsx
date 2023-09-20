@@ -55,6 +55,8 @@ export default function OrdersTable({ loadOrders }) {
           <TableHeaderCell>Address</TableHeaderCell>
           <TableHeaderCell>User</TableHeaderCell>
           <TableHeaderCell>Phone</TableHeaderCell>
+          <TableHeaderCell>PromoCode</TableHeaderCell>
+          <TableHeaderCell>Discount</TableHeaderCell>
           <TableHeaderCell>Total</TableHeaderCell>
           <TableHeaderCell>Status</TableHeaderCell>
         </TableRow>
@@ -81,7 +83,29 @@ export default function OrdersTable({ loadOrders }) {
                   <Text>{order.phone}</Text>
                 </TableCell>
                 <TableCell>
-                  <Text>
+                  <Text>{order.promo_code}</Text>
+                </TableCell>
+                <TableCell>
+                  <Text>{order.discount}%</Text>
+                </TableCell>
+                <TableCell>
+                  {order.discount && (
+                    <Text>
+                      {order.products.reduce((prev, product) => {
+                        return (
+                          prev + product.order_item.quantity * product.price
+                        );
+                      }, 0) -
+                        (order.discount / 100) *
+                          order.products.reduce((prev, product) => {
+                            return (
+                              prev + product.order_item.quantity * product.price
+                            );
+                          }, 0)}{' '}
+                      EGP
+                    </Text>
+                  )}
+                  <Text className={order.discount ? 'line-through' : ''}>
                     {order.products.reduce((prev, product) => {
                       return prev + product.order_item.quantity * product.price;
                     }, 0)}{' '}
