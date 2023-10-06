@@ -1,6 +1,6 @@
 // import { getToken } from './auth';
-const host = 'https://lucky-industrious-fortnight.glitch.me';
-// const host = 'http://localhost:4000';
+// const host = 'https://lucky-industrious-fortnight.glitch.me';
+const host = 'http://localhost:4000';
 
 export async function getPromoCodes() {
   const options = {
