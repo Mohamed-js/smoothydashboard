@@ -5,8 +5,7 @@ import {
   TableHeaderCell,
   TableBody,
   TableCell,
-  Text,
-  Badge
+  Text
 } from '@tremor/react';
 import Image from 'next/image';
 import { HiEye } from 'react-icons/hi2';
