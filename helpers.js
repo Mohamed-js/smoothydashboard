@@ -1,6 +1,6 @@
 // import { getToken } from './auth';
-// const host = 'https://lucky-industrious-fortnight.glitch.me';
-const host = 'http://localhost:4000';
+const host = 'https://lucky-industrious-fortnight.glitch.me';
+// const host = 'http://localhost:4000';
 
 export async function getPromoCodes() {
   const options = {
@@ -34,6 +34,19 @@ export async function updateOrder(id, status) {
     },
     method: 'PATCH',
     body: JSON.stringify({ status })
+  };
+
+  const res = await fetch(host + `/admin/orders/${id}`, options);
+
+  return await res.json();
+}
+
+export async function deleteOrder(id) {
+  const options = {
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    method: 'DELETE'
   };
 
   const res = await fetch(host + `/admin/orders/${id}`, options);

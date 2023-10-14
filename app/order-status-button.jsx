@@ -1,6 +1,6 @@
 'use client';
 
-import { getOrders, updateOrder } from '../helpers';
+import { deleteOrder, getOrders, updateOrder } from '../helpers';
 import { useState } from 'react';
 export default function OrderStatusButton({ order, setOrders }) {
   const statuses = ['pending', 'on delivery', 'complete'];
@@ -11,6 +11,12 @@ export default function OrderStatusButton({ order, setOrders }) {
 
   const handleStatusChange = async (id, status) => {
     await updateOrder(id, status);
+    toggleMenu();
+    setOrders(await getOrders());
+  };
+
+  const handleDeleteOrder = async (id) => {
+    await deleteOrder(id);
     toggleMenu();
     setOrders(await getOrders());
   };
@@ -55,6 +61,13 @@ export default function OrderStatusButton({ order, setOrders }) {
                 );
               }
             })}
+            <div
+              key={order.id + '1'}
+              className="p-1 capitalize cursor-pointer mb-1 text-white bg-red-600 rounded font-semibold text-center"
+              onClick={() => handleDeleteOrder(order.id)}
+            >
+              × Delete Order ×
+            </div>
           </div>
         )}
       </div>
